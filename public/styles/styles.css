@@ -1,0 +1,31 @@
+.active > .page-link,
+.page-link.active {
+  background-color: #5c6168;
+  color: #d1e7dd;
+  border-color: black;
+}
+
+.navigation {
+  color: black;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  font-size: var(--bs-pagination-font-size);
+  color: black;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.page-link:hover {
+  color: white;
+  background-color: #d1e7dd;
+}
+
+.pagination span {
+  margin: 5px;
+  color: #d1e7dd;
+  text-decoration: none;
+}

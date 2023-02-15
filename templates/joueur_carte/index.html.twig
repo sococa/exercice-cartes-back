@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des associations{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <h1>Associations de cartes et joueurs</h1>
+
+        <a href="{{ path('association.create') }}" class="btn btn-primary">
+            Créer association
+        </a>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-success">
+                    <tr>
+                        <th scope="col">Joueur</th>
+                        <th scope="col">Carte(s)</th>
+                        <th scope="col">Quantité(s) possédée(s)</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for joueurGroup in groupedAssociations %}
+                        {% set joueur = joueurGroup.joueur %}
+                        {% set associations = joueurGroup.associations %}
+                        <tr>
+                            <td>{{ joueur.nom }}</td>
+                            <td>
+                                {% for association in associations %}
+                                    <p>{{ association.carte.nom }}</p>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for association in associations %}
+                                    <p>{{ association.quantiteCartes }}</p>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for association in associations %}
+                                    <a class="btn btn-warning" href="{{ path('associations.delete', { id: association.id}) }}" class="btn btn-primary">
+                                        Supprimer
+                                    </a>
+                                    <br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

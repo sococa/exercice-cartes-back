@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.submit, { 'label': 'modifier' }) }}
+            {{ form_row(form._token) }}
+    </div>
+{% endblock %}

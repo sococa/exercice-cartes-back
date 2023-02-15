@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des joueurs{% endblock %}
+
+{% block body %}
+    <div class="container"> 
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <h1>Liste des joueurs</h1>
+
+        <a href="{{ path('joueurs.create') }}" class="btn btn-primary">
+            Ajouter un joueur
+        </a> 
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-success">
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Email</th>
+                </thead>
+                {% for joueur in joueurs %}
+                    <tbody>
+                        <tr>
+                            <td>{{ joueur.id }}</td>
+                            <td>{{ joueur.nom }}</td>
+                            <td>{{ joueur.email }}</td>
+                            <td>
+                                <a class="btn btn-secondary" href="{{ path('joueurs.update', { id: joueur.id}) }}" class="btn btn-primary">
+                                    modifier
+                                </a>
+                            </td> 
+                            <td>
+                                <a class="btn btn-warning" href="{{ path('joueurs.delete', { id: joueur.id}) }}" class="btn btn-primary">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

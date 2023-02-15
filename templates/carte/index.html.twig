@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des cartes{% endblock %}
+
+{% block body %}
+    <div class="container"> 
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <h1>Liste des cartes</h1>
+
+        <a href="{{ path('cartes.create') }}" class="btn btn-primary">
+            Ajouter une carte
+        </a>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-success">
+                    <th scope="col">#</th>
+                    <th scope="col">Nom de la carte</th>
+                    <th scope="col">Illustration</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Chiffre</th>
+                    <th scope="col">Quantité totale</th>
+                </thead>
+                {% for carte in cartes %}
+                    <tbody>
+                        <tr>
+                            <td>{{ carte.id }}</td>
+                            <td>{{ carte.nom }}</td>
+                            <td>
+                                <div class='recipe_image'>
+                                    <img style="max-width: 50px" src="{{ vich_uploader_asset(carte, 'imageFile')}}"></img>
+                                </div>
+                            </td>
+                            <td>{{ carte.description }}</td>
+                            <td>{{ carte.chiffre }}</td>
+                            <td>
+                                <a class="btn btn-secondary" href="{{ path('cartes.update', { id: carte.id}) }}" class="btn btn-primary">
+                                    modifier
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-warning" href="{{ path('cartes.delete', { id: carte.id}) }}" class="btn btn-primary">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
